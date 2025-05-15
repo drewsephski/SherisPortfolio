@@ -11,7 +11,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn, NAV_LINKS } from "@/utils";
-import { LucideIcon, ZapIcon } from "lucide-react";
+import { type LucideIcon, UserCircleIcon, MailIcon } from "lucide-react"; // Changed ZapIcon to UserCircleIcon and MailIcon
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import MaxWidthWrapper from "../global/max-width-wrapper";
@@ -22,20 +22,20 @@ import { Icons } from "../global/icons";
 const Navbar = () => {
   const [scroll, setScroll] = useState(false);
 
-  const handleScroll = () => {
+  const handleScroll = React.useCallback(() => {
     if (window.scrollY > 8) {
       setScroll(true);
     } else {
       setScroll(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   return (
     <header
@@ -47,72 +47,24 @@ const Navbar = () => {
       <AnimationContainer reverse delay={0.1} className="size-full">
         <MaxWidthWrapper className="flex items-center justify-between">
           <div className="flex items-center space-x-12">
-            <Link href="/#home" className="flex items-center gap-x-2">
-              <Icons.logo className="w-6 h-6" />
-              <h1 className="text-lg font-medium">faria</h1>
+            <Link href="/" className="flex items-center gap-x-2"> {/* Changed href to root for portfolio */}
+              <UserCircleIcon className="w-7 h-7 text-primary" /> {/* Using UserCircleIcon for logo */}
+              <h1 className="text-lg font-medium">Sheri</h1> {/* Changed site name */}
             </Link>
 
             <NavigationMenu className="hidden lg:flex">
               <NavigationMenuList>
                 {NAV_LINKS.map((link) => (
                   <NavigationMenuItem key={link.title}>
-                    {link.menu ? (
-                      <>
-                        <NavigationMenuTrigger>
-                          {link.title}
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                          <ul
-                            className={cn(
-                              "grid gap-1 p-4 md:w-[400px] lg:w-[500px] rounded-xl",
-                              link.title === "Features"
-                                ? "lg:grid-cols-[.75fr_1fr]"
-                                : "lg:grid-cols-2"
-                            )}
-                          >
-                            {link.title === "Features" && (
-                              <li className="row-span-4 pr-2 relative rounded-lg overflow-hidden">
-                                <div className="absolute inset-0 !z-10 h-full w-[calc(100%-10px)] bg-[linear-gradient(to_right,rgb(38,38,38,0.5)_1px,transparent_1px),linear-gradient(to_bottom,rgb(38,38,38,0.5)_1px,transparent_1px)] bg-[size:1rem_1rem]"></div>
-                                <NavigationMenuLink
-                                  asChild
-                                  className="z-20 relative"
-                                >
-                                  <Link
-                                    href="/"
-                                    className="flex h-full w-full select-none flex-col justify-end rounded-lg bg-gradient-to-b from-muted/50 to-muted p-4 no-underline outline-none focus:shadow-md"
-                                  >
-                                    <h6 className="mb-2 mt-4 text-lg font-medium">
-                                      All Features
-                                    </h6>
-                                    <p className="text-sm leading-tight text-muted-foreground">
-                                      Manage links, track performance, and more.
-                                    </p>
-                                  </Link>
-                                </NavigationMenuLink>
-                              </li>
-                            )}
-                            {link.menu.map((menuItem) => (
-                              <ListItem
-                                key={menuItem.title}
-                                title={menuItem.title}
-                                href={menuItem.href}
-                                icon={menuItem.icon}
-                              >
-                                {menuItem.tagline}
-                              </ListItem>
-                            ))}
-                          </ul>
-                        </NavigationMenuContent>
-                      </>
-                    ) : (
-                      <Link href={link.href} legacyBehavior passHref>
-                        <NavigationMenuLink
-                          className={navigationMenuTriggerStyle()}
-                        >
-                          {link.title}
-                        </NavigationMenuLink>
-                      </Link>
-                    )}
+                    {/* Simplified: No dropdown menus for portfolio, direct links only */}
+                    <Link href={link.href} legacyBehavior passHref>
+                      <NavigationMenuLink
+                        className={navigationMenuTriggerStyle()}
+                      >
+                        {link.icon && <link.icon className="h-4 w-4 mr-2" />} {/* Optional: display icon */}
+                        {link.title}
+                      </NavigationMenuLink>
+                    </Link>
                   </NavigationMenuItem>
                 ))}
               </NavigationMenuList>
@@ -121,22 +73,26 @@ const Navbar = () => {
 
           <div className="hidden lg:flex items-center">
             <div className="flex items-center gap-x-4">
-              <Link
-                href="/auth/sign-in"
+              {/* Replacing Sign In/Get Started with a Contact Me button or LinkedIn */}
+              <a
+                href="https://www.linkedin.com/in/sheri-sepeczi-94914515/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={buttonVariants({ size: "sm", variant: "ghost" })}
               >
-                Sign In
-              </Link>
-              <Link
-                href="/auth/sign-up"
+                LinkedIn
+              </a>
+              <a
+                href="mailto:sepeczi@ameritech.net"
                 className={buttonVariants({ size: "sm" })}
               >
-                Get Started
-                <ZapIcon className="size-3.5 ml-1.5 text-orange-500 fill-orange-500" />
-              </Link>
+                Contact Me
+                <MailIcon className="size-3.5 ml-1.5" />
+              </a>
             </div>
           </div>
 
+          {/* MobileNavbar will also need to be updated to reflect these simplified links */}
           <MobileNavbar />
         </MaxWidthWrapper>
       </AnimationContainer>
@@ -152,7 +108,7 @@ const ListItem = React.forwardRef<
     <li>
       <NavigationMenuLink asChild>
         <Link
-          href={href!}
+          href={href || ""}
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-all duration-100 ease-out hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
@@ -165,7 +121,7 @@ const ListItem = React.forwardRef<
             <h6 className="text-sm font-medium !leading-none">{title}</h6>
           </div>
           <p
-            title={children! as string}
+            title={typeof children === 'string' ? children : ""}
             className="line-clamp-1 text-sm leading-snug text-muted-foreground"
           >
             {children}

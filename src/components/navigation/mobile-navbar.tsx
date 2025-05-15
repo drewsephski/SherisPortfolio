@@ -14,7 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn, NAV_LINKS } from "@/utils";
-import { LucideIcon, Menu, X } from "lucide-react";
+import { LucideIcon, Menu, X, MailIcon } from "lucide-react"; // Added MailIcon
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -43,63 +43,42 @@ const MobileNavbar = () => {
             </Button>
           </SheetClose>
           <div className="flex flex-col items-start w-full py-2 mt-10">
+            {/* Simplified top buttons for portfolio */}
             <div className="flex items-center justify-evenly w-full space-x-2">
-              <>
-                <Link
-                  href="/auth/sign-in"
-                  className={buttonVariants({
-                    variant: "outline",
-                    className: "w-full",
-                  })}
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/auth/sign-up"
-                  className={buttonVariants({ className: "w-full" })}
-                >
-                  Sign Up
-                </Link>
-              </>
+              <a
+                href="https://www.linkedin.com/in/sheri-sepeczi-94914515/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({
+                  variant: "outline",
+                  className: "w-full",
+                })}
+                onClick={handleClose}
+              >
+                LinkedIn
+              </a>
+              <a
+                href="mailto:sepeczi@ameritech.net"
+                className={buttonVariants({ className: "w-full" })}
+                onClick={handleClose}
+              >
+                Contact Me
+              </a>
             </div>
+            {/* Simplified navigation links for portfolio - no accordion needed */}
             <ul className="flex flex-col items-start w-full mt-6">
-              <Accordion type="single" collapsible className="!w-full">
-                {NAV_LINKS.map((link) => (
-                  <AccordionItem
-                    key={link.title}
-                    value={link.title}
-                    className="last:border-none"
+              {NAV_LINKS.map((link) => (
+                <li key={link.title} className="w-full">
+                  <Link
+                    href={link.href}
+                    onClick={handleClose}
+                    className="flex items-center w-full py-4 font-medium text-muted-foreground hover:text-foreground"
                   >
-                    {link.menu ? (
-                      <>
-                        <AccordionTrigger>{link.title}</AccordionTrigger>
-                        <AccordionContent>
-                          <ul onClick={handleClose} className={cn("w-full")}>
-                            {link.menu.map((menuItem) => (
-                              <ListItem
-                                key={menuItem.title}
-                                title={menuItem.title}
-                                href={menuItem.href}
-                                icon={menuItem.icon}
-                              >
-                                {menuItem.tagline}
-                              </ListItem>
-                            ))}
-                          </ul>
-                        </AccordionContent>
-                      </>
-                    ) : (
-                      <Link
-                        href={link.href}
-                        onClick={handleClose}
-                        className="flex items-center w-full py-4 font-medium text-muted-foreground hover:text-foreground"
-                      >
-                        <span>{link.title}</span>
-                      </Link>
-                    )}
-                  </AccordionItem>
-                ))}
-              </Accordion>
+                    {link.icon && <link.icon className="h-5 w-5 mr-3" />}
+                    <span>{link.title}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </SheetContent>
@@ -108,35 +87,8 @@ const MobileNavbar = () => {
   );
 };
 
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { title: string; icon: LucideIcon }
->(({ className, title, href, icon: Icon, children, ...props }, ref) => {
-  return (
-    <li>
-      <Link
-        href={href!}
-        ref={ref}
-        className={cn(
-          "block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-          className
-        )}
-        {...props}
-      >
-        <div className="flex items-center space-x-2 text-foreground">
-          <Icon className="h-4 w-4" />
-          <h6 className="text-sm !leading-none">{title}</h6>
-        </div>
-        <p
-          title={children! as string}
-          className="line-clamp-1 text-sm leading-snug text-muted-foreground"
-        >
-          {children}
-        </p>
-      </Link>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";
+// ListItem component might not be needed if we simplify to direct links without submenus.
+// If kept for other purposes, ensure it's used correctly or remove if unused.
+// For this portfolio revamp, assuming it's not directly used in mobile nav anymore.
 
 export default MobileNavbar;

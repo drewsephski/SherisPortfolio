@@ -2,71 +2,69 @@ import { AnimationContainer, MaxWidthWrapper } from "@/components";
 import { Button } from "@/components/ui/button";
 import { LampContainer } from "@/components/ui/lamp";
 import MagicBadge from "@/components/ui/magic-badge";
-import { COMPANIES } from "@/utils";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, MailIcon, LinkedinIcon, DownloadIcon, PhoneIcon } from "lucide-react"; // Changed
 import Image from "next/image";
 import Link from "next/link";
 
-const LinkShorteningPage = () => {
+// Renaming page to reflect portfolio context, e.g., EducationAndContactPage
+const EducationAndContactPage = () => {
     return (
         <>
             <MaxWidthWrapper>
                 <AnimationContainer delay={0.1} className="w-full">
-                    <div className="flex flex-col items-center justify-center py-10 max-w-lg mx-auto">
-                        <MagicBadge title="Unique" />
+                    <div className="flex flex-col items-center justify-center py-2 max-w-2xl mx-auto">
+                        <MagicBadge title="Education" />
                         <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold font-heading text-center mt-6 !leading-tight">
-                            Create QR codes for your links
+                            Educational Background
                         </h1>
                         <p className="text-base md:text-lg mt-6 text-center text-muted-foreground">
-                            Enhance your marketing strategy with custom QR codes. Drive engagement and track performance with ease.
+                            Master&apos;s and Bachelor&apos;s degrees in Electrical Engineering, complemented by a passion for continuous learning and community involvement.
                         </p>
                         <div className="flex items-center justify-center gap-x-4 mt-8">
                             <Button size="sm" asChild>
-                                <Link href="/dashboard">
-                                    Get started
-                                </Link>
+                                <a href="mailto:sepeczi@ameritech.net"> {/* Direct mail link */}
+                                    Email Sheri
+                                </a>
                             </Button>
                             <Button size="sm" variant="outline" asChild>
-                                <Link href="/blog">
-                                    Learn more
-                                </Link>
+                                <a href="https://www.linkedin.com/in/sheri-sepeczi-94914515/" target="_blank" rel="noopener noreferrer">
+                                    LinkedIn Profile
+                                </a>
                             </Button>
                         </div>
                     </div>
                 </AnimationContainer>
                 <AnimationContainer delay={0.2} className="w-full">
-                    <div className="w-full flex max-w-4xl py-10 mx-auto">
+                    {/* Placeholder for a more relevant image or graphic for education/contact */}
+                    <div className="w-full flex max-w-4xl py-0 mx-auto">
                         <Image
-                            src="/assets/qr-codes.svg"
-                            alt="Create QR codes for your links"
-                            width={80}
-                            height={80}
-                            className="w-full h-auto"
+                            src="/assets/michigan-tech-huskies.svg" // Example placeholder, replace with relevant image
+                            alt="Education and Contact Information"
+                            width={800}
+                            height={200}
+                            className="w-full h-auto rounded-lg shadow-md"
                         />
                     </div>
                 </AnimationContainer>
                 <AnimationContainer delay={0.3} className="w-full">
-                    <div className="py-14">
+                    <div className="py-1">
                         <div className="mx-auto px-4 md:px-8">
-                            <h2 className="text-center text-sm font-medium font-heading text-neutral-400 uppercase">
-                                Trusted by the best in the industry
+                            <h2 className="text-center text-4xl font-medium font-heading text-neutral-400 uppercase">
+                                Academic Achievements
                             </h2>
-                            <div className="mt-8">
-                                <ul className="flex flex-wrap items-center gap-x-6 gap-y-6 md:gap-x-16 justify-center py-8">
-                                    {COMPANIES.map((company) => (
-                                        <li key={company.name}>
-                                            <Image
-                                                src={company.logo}
-                                                alt={company.name}
-                                                width={80}
-                                                height={80}
-                                                quality={100}
-                                                className="w-28 h-auto"
-                                            />
-                                        </li>
-                                    ))}
-                                </ul>
+                            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+     
+                                <div className="p-6 border border-border/30 rounded-lg shadow-sm bg-card">
+                                    <h3 className="text-2xl font-semibold text-foreground">Michigan Technological University</h3>
+                                    <p className="text-xl text-muted-foreground mt-1">Bachelor’s Degree in Electrical, Electronics, and Communications Engineering (1987 – 1992)</p>
+                                </div>
+                                <div className="p-6 border border-border/30 rounded-lg shadow-sm bg-card">
+                                <h3 className="text-2xl font-semibold text-foreground">Michigan Technological University</h3>
+                                <p className="text-xl text-muted-foreground mt-1">Master’s Degree in Electrical, Electronics, and Communications Engineering (1998 – 2002)</p>
+                                </div>
                             </div>
+                            <p className="text-sm text-muted-foreground mt-4"><span className="font-bold text-md text-center">Activities & Societies: </span><br/> Women in Engineering, Alpha Gamma Delta (Vice President), Football/Basketball Cheerleader, Student Government</p>
+
                         </div>
                     </div>
                 </AnimationContainer>
@@ -76,17 +74,23 @@ const LinkShorteningPage = () => {
                     <LampContainer className="max-w-2xl mx-auto">
                         <div className="flex flex-col items-center justify-center relative w-full text-center">
                             <h2 className="bg-gradient-to-br from-neutral-300 to-neutral-500 py-4 bg-clip-text text-center text-4xl font-semibold font-heading tracking-tight text-transparent md:text-7xl mt-8">
-                                Powerup your link strategy
+                                Get in Touch
                             </h2>
                             <p className="text-muted-foreground mt-6 max-w-lg mx-auto text-base md:text-lg">
-                                Take control of your links with advanced features and real-time insights. Simplify your workflow and achieve more.
+                                I&apos;m always open to discussing new opportunities, collaborations, or sharing insights.
                             </p>
-                            <div className="mt-6">
+                            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
                                 <Button asChild>
-                                    <Link href="/auth/sign-up" className="flex items-center">
-                                        Get started for free
-                                        <ArrowRightIcon className="w-4 h-4 ml-2" />
-                                    </Link>
+                                    <a href="mailto:sepeczi@ameritech.net" className="flex items-center">
+                                        <MailIcon className="w-4 h-4 mr-2" />
+                                        sepeczi@ameritech.net
+                                    </a>
+                                </Button>
+                                <Button variant="outline" asChild>
+                                    <a href="tel:630-514-2364" className="flex items-center">
+                                        <PhoneIcon className="w-4 h-4 mr-2" /> {/* Assuming PhoneIcon exists */}
+                                        630-514-2364
+                                    </a>
                                 </Button>
                             </div>
                         </div>
@@ -97,4 +101,4 @@ const LinkShorteningPage = () => {
     )
 };
 
-export default LinkShorteningPage
+export default EducationAndContactPage;

@@ -1,64 +1,34 @@
-import { HelpCircleIcon, LineChartIcon, Link2Icon, LockIcon, NewspaperIcon, QrCodeIcon } from "lucide-react";
+import { BriefcaseIcon, GraduationCapIcon, UsersIcon, InfoIcon, MailIcon, HomeIcon } from "lucide-react";
 
 export const NAV_LINKS = [
     {
-        title: "Features",
-        href: "/features",
-        menu: [
-            {
-                title: "Link Shortening",
-                tagline: "Shorten links and track their performance.",
-                href: "/features/link-shortening",
-                icon: Link2Icon,
-            },
-            {
-                title: "Password Protection",
-                tagline: "Secure your links with a password.",
-                href: "/features/password-protection",
-                icon: LockIcon,
-            },
-            {
-                title: "Advanced Analytics",
-                tagline: "Gain insights into who is clicking your links.",
-                href: "/features/analytics",
-                icon: LineChartIcon,
-            },
-            {
-                title: "Custom QR Codes",
-                tagline: "Use QR codes to reach your audience.",
-                href: "/features/qr-codes",
-                icon: QrCodeIcon,
-            },
-        ],
+        title: "Home",
+        href: "/",
+        icon: HomeIcon,
     },
     {
-        title: "Pricing",
-        href: "/pricing",
+        title: "Experience",
+        href: "/features/analytics", // Re-using existing path, will be ProfessionalExperiencePage
+        icon: BriefcaseIcon,
     },
     {
-        title: "Enterprise",
-        href: "/enterprise",
+        title: "Skills",
+        href: "/features/link-shortening", // Re-using existing path, will be SkillsAndExpertisePage
+        icon: UsersIcon, // UsersIcon can represent skills/teamwork
     },
     {
-        title: "Resources",
-        href: "/resources",
-        menu: [
-            {
-                title: "Blog",
-                tagline: "Read articles on the latest trends in tech.",
-                href: "/resources/blog",
-                icon: NewspaperIcon,
-            },
-            {
-                title: "Help",
-                tagline: "Get answers to your questions.",
-                href: "/resources/help",
-                icon: HelpCircleIcon,
-            },
-        ]
+        title: "Community",
+        href: "/features/password-protection", // Re-using existing path, will be CommunityInvolvementPage
+        icon: UsersIcon, // UsersIcon can represent community
     },
     {
-        title: "Changelog",
-        href: "/changelog",
+        title: "Education",
+        href: "/features/qr-codes", // Re-using existing path, will be EducationAndContactPage (Education part)
+        icon: GraduationCapIcon,
     },
+    {
+        title: "Contact",
+        href: "/changelog", // Re-using existing path, will be ConnectPage
+        icon: MailIcon,
+    }
 ];
